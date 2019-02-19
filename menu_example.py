@@ -1,4 +1,4 @@
-from simple_list import SimpleList
+from simple_lists import SimpleList
 
 def main():
     _list = SimpleList(True) # if true, window will be cleared on init   
