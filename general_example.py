@@ -1,4 +1,4 @@
-from simple_lists import SimpleList
+import SimpleList
 
 _list = SimpleList(True)   
 
