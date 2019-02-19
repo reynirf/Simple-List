@@ -11,7 +11,7 @@ class SimpleList:
     ERASE_LINE = "\x1b[2K"
 
     def __init__(self, clear=False):
-        self.simple_key = simpleKey()
+        self.__simple_key = simpleKey()
         self.color = Color()
         if clear:
             self.clear_window()
@@ -24,7 +24,7 @@ class SimpleList:
             sys.stdout.write(SimpleList.CURSOR_UP_ONE)
             sys.stdout.write(SimpleList.ERASE_LINE)
         
-    def print_alternatives(self, question, alternatives, alternative_index, go_back):
+    def __print_alternatives(self, question, alternatives, alternative_index, go_back):
         print("[{}] {}: {}".format(
             self.color.return_colored("!", "yellow"),
             question,
@@ -42,7 +42,7 @@ class SimpleList:
                     print()
                 print("     {}".format(alternative))
 
-    def choose_one(self, question, alternatives, answer_key='answer', get_chosen_index=False, go_back=False):
+    def choose_one(self, question, alternatives, key='answer', get_index=False, go_back=False):
         """ from a list of alternatives, let user choose one of them """
         
         alternative_index = 0
@@ -50,47 +50,47 @@ class SimpleList:
         if go_back:
             alternatives.append(go_back)
         #print the alternatives
-        self.print_alternatives(
+        self.__print_alternatives(
             question,
             alternatives,
             alternative_index,
             go_back
         )
         while not answer_from_user: # run until the user chooses an alternative
-            key = self.simple_key.getKey()
-            if key == "up":
+            _key = self.__simple_key.getKey()
+            if _key == "up":
                 if alternative_index != 0:
                     alternative_index -= 1
-            elif key == "down":
+            elif _key == "down":
                 if alternative_index != len(alternatives) - 1:
                     alternative_index += 1
-            elif key == "right":
-                if get_chosen_index:
+            elif _key == "right":
+                if get_index:
                     answer_from_user = {
-                        answer_key: alternatives[alternative_index], 
+                        key: alternatives[alternative_index], 
                         "index": alternative_index
                     }
                     if alternative_index == len(alternatives) - 1 and go_back:
                         answer_from_user["index"] = alternatives[alternative_index]
                 else:
-                    answer_from_user = { answer_key: alternatives[alternative_index] }
-            elif key == "left":
+                    answer_from_user = { key: alternatives[alternative_index] }
+            elif _key == "left":
                 pass
             else:
                 if os.name == "nt": # for Windows
-                    key = key.decode("utf-8")
-                if key not in string.digits and key not in string.ascii_letters and key not in string.punctuation: 
-                    if get_chosen_index:
+                    _key = key.decode("utf-8")
+                if _key not in string.digits and _key not in string.ascii_letters and _key not in string.punctuation: 
+                    if get_index:
                         answer_from_user = {
-                            answer_key: alternatives[alternative_index], 
+                            key: alternatives[alternative_index], 
                             "index": alternative_index
                         }
                         if alternative_index == len(alternatives) - 1 and go_back:
                             answer_from_user["index"] = alternatives[alternative_index]
                     else:
-                        answer_from_user = { answer_key: alternatives[alternative_index] }
+                        answer_from_user = { key: alternatives[alternative_index] }
             self.delete_last_lines(len(alternatives) + 2)
-            self.print_alternatives(
+            self.__print_alternatives(
                 question,
                 alternatives,
                 alternative_index,
@@ -100,7 +100,7 @@ class SimpleList:
         # return answer
         return answer_from_user
 
-    def single_list(self, alternative='Go back'):
+    def single_list(self, alternatives):
         """ 
             Only one alternative. Useful when for instance only giving 
             "Go back" alternative to the user 
@@ -111,7 +111,7 @@ class SimpleList:
         pressed = False
 
         while not pressed:
-            key = self.simple_key.getKey() # get key_press from user
+            key= self.__simple_key.getKey() # get key_press from user
             enter_key = string.digits + string.ascii_letters + string.punctuation
             if key not in enter_key and key != "down" and key != "up":
                 pressed = True
@@ -123,7 +123,7 @@ class simpleKey:
     def __init__(self):
         self.msvcrt = ""
 
-    def get_character(self):
+    def __get_character(self):
         """ get character input from user """
         try: # Unix
             # only accessible for unix devices
@@ -149,7 +149,7 @@ class simpleKey:
             format character to key if special key was pressed and return it, 
             else return character unchanged 
         """ 
-        firstChar = self.get_character()
+        firstChar = self.__get_character()
         # if statement for Unix
         if firstChar == "\x1b":  # looks like this: ^[
             return {
@@ -157,7 +157,7 @@ class simpleKey:
                 "[B": "down",
                 "[C": "right",
                 "[D": "left",
-            }[self.get_character() + self.get_character()]
+            }[self.__get_character() + self.__get_character()]
         # elif for Windows
         elif firstChar == b"\xe0": # if special key is pressed, for instance arrow keys
             # return "up" if Windows version of arrow key "up" is b"\xe0H etc...

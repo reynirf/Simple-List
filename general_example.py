@@ -11,7 +11,11 @@ data = _list.choose_one(
 )
 print(data)
 
-_list.clear_window()
+print()
+print()
+print()
+print()
+
 
 pizzas = ["Classic", "Italian", "Vegan", "Pan"]  
 print("Types of pizzas")
@@ -20,5 +24,8 @@ for pizza in pizzas:
     print(pizza)
 
 _list.single_list('Go back')
+
+_list.clear_window()
+
 
 # run some other code after 'go back'...
