@@ -25,10 +25,17 @@ TODO: write a documentation for all available methods
 * **SimpleList.choose_one(question, alternatives, key, get_index, go_back)**
     * question - string (required)
     * alternatives - list (required)
-    * key - string (optional)
-    * get_index - boolean (optional)
-    * go_back - string (optional)
+    * key - string (optional) | default: answer
+    * get_index - boolean (optional) | default: False
+    * go_back - string (optional) | default: False
 * **SimpleList.single_list(alternative)**
     * alternative - string (required)
+* **SimpleList.clear_window()**
+* **SimpleList.delete_last_lines(n)**
+    * n - int (optional) | default: 1
+* **SimpleList.color.return_colored(text, color)**
+    * text - string (required)
+    * color - string (required) | examples: 'red', 'blue', 'cyan', 'bold', 'underline' or 'yellow'
+
 
 
