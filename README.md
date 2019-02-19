@@ -6,7 +6,7 @@ This module makes it easy to make lists that are interactable using the keyboard
 ** **
 # Setup:
 ```
-$ pip3 install simple_list
+$ pip3 install ... (coming soon)
 ```
 
 # Usage:
