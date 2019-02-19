@@ -1,4 +1,4 @@
-# Simple Lists
+# Simple List
 
 This module makes it easy to make lists that are interactable using the keyboard (arrow keys). 
 
