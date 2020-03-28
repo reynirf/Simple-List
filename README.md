@@ -2,13 +2,14 @@
 
 This module makes it easy to make lists that are interactable using the keyboard (arrow keys). 
 
+![Picture 1](https://i.imgur.com/r3GBmZ0.png)
+
 ##### There might still be some bugs when using a Windows OS. Open an [issue](https://github.com/reynirf/Simple-List/issues) if you find one! :) #####
 ** **
 # Setup:
 ```
 $ pip3 install ... (coming soon)
 ```
-![Picture 1](https://i.imgur.com/r3GBmZ0.png)
 
 # Usage:
 
