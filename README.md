@@ -8,7 +8,7 @@ This module makes it easy to make lists that are interactable using the keyboard
 ```
 $ pip3 install ... (coming soon)
 ```
-![Picture 1(https://i.imgur.com/r3GBmZ0.png)
+![Picture 1](https://i.imgur.com/r3GBmZ0.png)
 
 # Usage:
 
